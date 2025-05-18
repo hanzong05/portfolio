@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme Variables - Light Purple Theme like Aathif Zahir's portfolio */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --border: #e5e7eb;
+}
+
+.dark {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --border: #374151;
+}
+
+/* Light Purple Theme like in the reference image */
+.purple {
+  --bg-primary: #f8f7fc;       /* Very light purple background */
+  --bg-secondary: #f0ebfa;     /* Light purple secondary background */
+  --text-primary: #4b4b4b;     /* Dark gray text */
+  --text-secondary: #595959;   /* Medium gray text */
+  --accent: #8a3ffc;           /* Vibrant purple accent */
+  --accent-hover: #7633d6;     /* Darker purple on hover */
+  --border: #e2d9f3;           /* Light purple border */
+  --purple-highlight: #8a3ffc; /* Primary purple */
+  --button-purple: #9d4edd;    /* Button purple */
+}
+
+/* Apply light purple theme to specific elements */
+html.purple {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Logo styling */
+html.purple .logo {
+  color: var(--accent);
+}
+
+/* Navigation styling */
+html.purple nav {
+  background-color: var(--bg-primary);
+  border-color: var(--border);
+}
+
+html.purple nav a {
+  color: var(--text-secondary);
+}
+
+html.purple nav a:hover {
+  color: var(--accent);
+}
+
+/* Button styling */
+html.purple .primary-button {
+  background-color: var(--button-purple);
+  color: white;
+}
+
+html.purple .primary-button:hover {
+  background-color: var(--accent-hover);
+}
+
+html.purple .secondary-button {
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+/* Hero section name styling */
+html.purple .hero-name .highlight {
+  color: var(--accent);
+}
+
+/* Code editor card styling */
+html.purple .code-card {
+  background-color: white;
+  box-shadow: 0 10px 25px rgba(138, 63, 252, 0.1);
+}
+
+html.purple .code-card .card-header {
+  background-color: var(--bg-secondary);
+}
+
+html.purple .code-card .code-content {
+  color: var(--text-primary);
+}
+
+html.purple .code-card .code-highlight {
+  color: var(--accent);
+}
+
+html.purple .code-card .code-string {
+  color: #10b981; /* Green for strings */
+}
+
+/* Social icons */
+html.purple .social-icon {
+  color: var(--text-secondary);
+}
+
+html.purple .social-icon:hover {
+  color: var(--accent);
+}
+
+/* Purple specific Tailwind overrides */
+html.purple .bg-blue-600,
+html.purple .dark\:bg-blue-500 {
+  background-color: var(--button-purple) !important;
+}
+
+html.purple .hover\:bg-blue-700:hover,
+html.purple .dark\:hover\:bg-blue-600:hover {
+  background-color: var(--accent-hover) !important;
+}
+
+html.purple .text-blue-600,
+html.purple .dark\:text-blue-400 {
+  color: var(--accent) !important;
+}
+
+/* Modify specific text colors for purple theme */
+html.purple .text-gray-800,
+html.purple .dark\:text-white {
+  color: var(--text-primary) !important;
+}
+
+html.purple .text-gray-600,
+html.purple .dark\:text-gray-300 {
+  color: var(--text-secondary) !important;
+}
+
+/* Contact button styling */
+html.purple .contact-button {
+  background-color: var(--button-purple);
+  color: white;
+}
+
+/* Resume button styling */
+html.purple .resume-button {
+  background-color: var(--button-purple);
+  color: white;
+  border: none;
+}
+
+html.purple .resume-button:hover {
+  background-color: var(--accent-hover);
+}
