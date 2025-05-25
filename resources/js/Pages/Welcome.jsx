@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Head } from '@inertiajs/react';
 import NavBar from '../Components/Nav';
 import DropGrid from '../Components/DropGrid';
-import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import { motion, useScroll,useInView, useMotionValueEvent } from 'framer-motion';
 import { useSpring, animated, useTransition } from 'react-spring';
 
 
@@ -79,13 +79,16 @@ const useStaggeredAnimation = (items, delay = 100) => {
 };
 
 export default function Welcome(props) {
+
   const { scrollY } = useScroll()
   const [selectedTech, setSelectedTech] = useState(null);
   const [filter, setFilter] = useState('all');
   const [activeProject, setActiveProject] = useState(null);
-useMotionValueEvent(scrollY, "change", (latest) => {
-  console.log("Page scroll: ", latest)
-})
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    console.log("Page scroll: ", latest)
+  })
 
 
   // Contact form state
@@ -916,10 +919,10 @@ const aboutHeaderAnimation = {
     <section ref={aboutRef} id="about" className="py-20 bg-gray-50 dark:bg-gray-800 purple:bg-[#0f172a] transition-colors duration-300">
       <div className="container mx-auto px-4 md:px-8 max-w-6xl">
        <motion.div
-  variants={aboutHeaderAnimation}
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true }}
+  ref={ref}
+      variants={aboutHeaderAnimation}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
 >
   <div className="text-center mb-12">
     <p className="text-lg text-gray-500 dark:text-gray-400 purple:text-gray-400 mb-2">GET TO KNOW ME</p>
