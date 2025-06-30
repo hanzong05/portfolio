@@ -10,8 +10,19 @@ local allowedSeeds = {
 
 AddSeedEvent.OnServerEvent:Connect(function(player, seedName)
     if not allowedSeeds[seedName] then
-        return -- invalid seed, ignore
+        return
     end
-    -- Add seed to player's inventory safely here
-    print(player.Name .. " got seed: " .. seedName)
+
+    local inventory = player:FindFirstChild("Inventory")
+    if not inventory then
+        inventory = Instance.new("Folder")
+        inventory.Name = "Inventory"
+        inventory.Parent = player
+    end
+
+    local seed = Instance.new("StringValue")
+    seed.Name = seedName
+    seed.Parent = inventory
+
+    print(player.Name .. " received seed: " .. seedName)
 end)
