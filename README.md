@@ -1,21 +1,17 @@
-local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local AddSeedEvent = Instance.new("RemoteEvent", ReplicatedStorage)
+AddSeedEvent.Name = "AddSeedEvent"
 
-local function AddSeedToPlayer(player, seedName)
-    if not player:FindFirstChild("Inventory") then
-        local inv = Instance.new("Folder")
-        inv.Name = "Inventory"
-        inv.Parent = player
+local allowedSeeds = {
+    ["Dragon Pepper"] = true,
+    ["Moon Blossom"] = true,
+    ["Candy Blossom"] = true,
+}
+
+AddSeedEvent.OnServerEvent:Connect(function(player, seedName)
+    if not allowedSeeds[seedName] then
+        return -- invalid seed, ignore
     end
-
-    local inventory = player:FindFirstChild("Inventory")
-    local seedItem = Instance.new("StringValue")
-    seedItem.Name = seedName
-    seedItem.Parent = inventory
-end
-
-while true do
-    wait(60)
-    for _, player in pairs(Players:GetPlayers()) do
-        AddSeedToPlayer(player, "Dragon Pepper")
-    end
-end
+    -- Add seed to player's inventory safely here
+    print(player.Name .. " got seed: " .. seedName)
+end)
