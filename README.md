@@ -1,28 +1,15 @@
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local AddSeedEvent = Instance.new("RemoteEvent", ReplicatedStorage)
-AddSeedEvent.Name = "AddSeedEvent"
+local TeleportService = game:GetService("TeleportService")
+local DataStoreService = game:GetService("DataStoreService")
+local OldServerStore = DataStoreService:GetDataStore("OldServerJobIds")
+local PLACE_ID = game.PlaceId
 
-local allowedSeeds = {
-    ["Dragon Pepper"] = true,
-    ["Moon Blossom"] = true,
-    ["Candy Blossom"] = true,
-}
-
-AddSeedEvent.OnServerEvent:Connect(function(player, seedName)
-    if not allowedSeeds[seedName] then
-        return
+local function teleportToOldServer(player)
+    local jobId = OldServerStore:GetAsync("latest_old_jobid")
+    if jobId then
+        TeleportService:TeleportToPlaceInstance(PLACE_ID, jobId, player)
+    else
+        warn("No old server id found.")
     end
+end
 
-    local inventory = player:FindFirstChild("Inventory")
-    if not inventory then
-        inventory = Instance.new("Folder")
-        inventory.Name = "Inventory"
-        inventory.Parent = player
-    end
-
-    local seed = Instance.new("StringValue")
-    seed.Name = seedName
-    seed.Parent = inventory
-
-    print(player.Name .. " received seed: " .. seedName)
-end)
+game.Players.PlayerAdded:Connect(teleportToOldServer)
